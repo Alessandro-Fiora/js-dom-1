@@ -1,28 +1,29 @@
 // * Funzione che accende la luce
-const turnOn = (light, button) => {
-  light.setAttribute("src", "./img/yellow_lamp.png");
-  light.classList = "accesa";
-  button.innerText = "Spegni";
-  button.classList.replace("btn-warning", "btn-dark");
+const turnOn = () => {
+  imgEl.src = onUrl;
+  buttonEl.innerText = "Spegni";
+  buttonEl.classList.replace("btn-warning", "btn-dark");
 };
 
 // * Funzione che spegne la luce
-const turnOff = (light, button) => {
-  light.setAttribute("src", "./img/white_lamp.png");
-  light.classList = "spenta";
-  button.innerText = "Accendi";
-  button.classList.replace("btn-dark", "btn-warning");
+const turnOff = () => {
+  imgEl.src = offUrl;
+  buttonEl.innerText = "Accendi";
+  buttonEl.classList.replace("btn-dark", "btn-warning");
 };
-
 // * prendo il nodo del bottone
 const buttonEl = document.querySelector("button");
 
 // * prendo il nodo dell'immagine
 const imgEl = document.querySelector("img");
 
+const onUrl = "img/yellow_lamp.png";
+const offUrl = "img/white_lamp.png";
+
 // * quando clicco sul bottone
 buttonEl.addEventListener("click", () => {
+  let isOn = imgEl.src.includes(onUrl);
   // * se l'immagine ha la clase 'spenta' invoco la funzione per accenderla, altrimenti quella per spegnerla
-  let isOff = !imgEl.classList.contains("accesa");
-  isOff ? turnOn(imgEl, buttonEl) : turnOff(imgEl, buttonEl);
+  isOn ? turnOff() : turnOn();
+  console.log(imgEl.src, isOn);
 });
